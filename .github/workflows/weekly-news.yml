@@ -1,0 +1,30 @@
+name: Weekly Canada Immigration News
+
+on:
+  schedule:
+    # 每周一早上9点执行 (UTC时间 = 北京时间下午5点)
+    - cron: '0 1 * * 1'
+  workflow_dispatch:
+
+jobs:
+  fetch-and-send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate news
+        run: npm run search
+
+      - name: Send email
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: npm run send
