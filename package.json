@@ -1,0 +1,13 @@
+{
+  "name": "canada-weekly-news",
+  "version": "1.0.0",
+  "description": "每周加拿大移民留学签证新闻汇总",
+  "scripts": {
+    "search": "node search.js",
+    "send": "node send.js"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "resend": "^6.12.2"
+  }
+}
