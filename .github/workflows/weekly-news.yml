@@ -2,7 +2,7 @@ name: Weekly Canada Immigration News
 
 on:
   schedule:
-    # 每周一早上9点执行 (UTC时间 = 北京时间下午5点)
+    # 每周一 UTC 时间 01:00 (北京时间上午 9:00 / 加东时间周日晚上 9:00)
     - cron: '0 1 * * 1'
   workflow_dispatch:
 
@@ -16,10 +16,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: '20'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Generate news
         run: npm run search
